@@ -3,18 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spotify Ranker</title>
     <script src="src/script.js"></script>
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
     <header>
-      <h1>Spotify ranker</h1>
+      <h1>Spotify Playlist Ranker</h1>
     </header>
     <main>
-      <label for="playlist_link">Enter playlist link:</label>
-      <input type="text" name="playlist_link" id="playlist" />
-      <button type="submit">Submit</button>
+      <div class="rank-container">
+        <h2>Enter a Spotify Playlist URL:</h2>
+        <input type="url" id="playlist-url" placeholder="Enter playlist URL" />
+        <button id="rank-button">Rank Playlist</button>
+      </div>
     </main>
   </body>
 </html>

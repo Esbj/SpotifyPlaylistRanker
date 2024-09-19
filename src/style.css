@@ -1,8 +1,58 @@
 * {
   padding: 0;
   margin: 0;
-  color: antiquewhite;
+  box-sizing: border-box;
 }
+
 body {
-  background-color: rgb(5, 23, 5);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.rank-container {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rank-item {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-left: 4px solid #3498db;
+}
+
+.rank-item span {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.comparison-container {
+  background-color: #eee;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.comparison-container p {
+  margin-bottom: 0.5rem;
+}
+
+.comparison-container button {
+  margin-right: 0.5rem;
 }
