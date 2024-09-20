@@ -1,32 +1,25 @@
+'use strict'
+
+function fetchPlaylistData(playlistUrl) {
+  const id = playlistUrl.split('/playlist/')[1]
+  fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+    "headers": {
+      Authorization: "Bearer BQBkVcpRyiiecQps7La56uCM08BYN0YvVbCyLbzXjW-OMwp2DMHFw-gEfB7PFcKXqSsI3FwsAynrt9yBWYaDv1W6WAghywtz3TlR9wa4thqlmEOIpUE",
+    }
+  })
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   const rankButton = document.getElementById('rank-button');
-  const resultDiv = document.getElementById('result');
 
-  let currentPlaylist = [];
-  let comparisonCount = 0;
 
   rankButton.addEventListener('click', function () {
     const playlistUrl = document.getElementById('playlist-url').value;
     fetchPlaylistData(playlistUrl)
-      .then(data => {
-        currentPlaylist = data.tracks.items;
-        displayInitialPlaylist(currentPlaylist);
-      })
-      .catch(error => {
-        console.error('Error fetching playlist data:', error);
-        resultDiv.textContent = 'An error occurred while fetching the playlist.';
-      });
+
   });
 
-  function displayInitialPlaylist(tracks) {
-    const rankingHtml = tracks.map((track, index) => `
-          <div class="rank-item">
-              <span>${index + 1}. ${track.track.name}</span>
-              <span>by ${track.track.artists[0].name}</span>
-          </div>
-      `).join('');
-    resultDiv.innerHTML = `<h3>Initial Playlist:</h3>${rankingHtml}`;
-  }
+
 
   function displayComparison(currentTrackIndex) {
     const trackA = currentPlaylist[currentTrackIndex];
@@ -72,22 +65,4 @@ document.addEventListener('DOMContentLoaded', function () {
     resultDiv.innerHTML = `<h3>Ranked Playlist:</h3>${rankingHtml}`;
   }
 
-  rankButton.addEventListener('click', function () {
-    const playlistUrl = document.getElementById('playlist-url').value;
-    fetchPlaylistData(playlistUrl)
-      .then(data => {
-        currentPlaylist = data.tracks.items;
-        displayInitialPlaylist(currentPlaylist);
-      })
-      .catch(error => {
-        console.error('Error fetching playlist data:', error);
-        resultDiv.textContent = 'An error occurred while fetching the playlist.';
-      });
-  });
-
-  document.getElementById('rank-button').addEventListener('click', function () {
-    if (comparisonCount >= Math.floor(currentPlaylist.length / 2)) {
-      displayFinalRanking();
-    }
-  });
 });
