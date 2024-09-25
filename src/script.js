@@ -1,25 +1,31 @@
 'use strict'
 
-function fetchPlaylistData(playlistUrl) {
+async function fetchPlaylistData(playlistUrl) {
   const id = playlistUrl.split('/playlist/')[1]
-  fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+  return await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
     "headers": {
-      Authorization: "Bearer BQBkVcpRyiiecQps7La56uCM08BYN0YvVbCyLbzXjW-OMwp2DMHFw-gEfB7PFcKXqSsI3FwsAynrt9yBWYaDv1W6WAghywtz3TlR9wa4thqlmEOIpUE",
+      Authorization: "Bearer BQBQq6oqbJzmYWIugvoJDhKY6rtwlb2zgtR7wqvfoeHZ0phljaIqtOtKhNz697z_4XqMMJar12XTZtS2AfDU-F8vNMXrqyr9keC7r0-mnsPQpQ2R5IU",
     }
   })
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
   const rankButton = document.getElementById('rank-button');
+  const compareArea = document.getElementById('song-comparasion')
+  console.log(compareArea)
 
 
   rankButton.addEventListener('click', function () {
     const playlistUrl = document.getElementById('playlist-url').value;
-    fetchPlaylistData(playlistUrl)
-
+    fetchPlaylistData(playlistUrl).then(data => data.json()).then(res => displayTracks(res))
   });
 
 
+  const displayTracks = (playlistData) => {
+    playlistData.tracks.items.map(item => compareArea.innerHTML = item.track.name)
+
+  }
 
   function displayComparison(currentTrackIndex) {
     const trackA = currentPlaylist[currentTrackIndex];
